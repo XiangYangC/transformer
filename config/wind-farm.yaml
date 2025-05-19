@@ -1,0 +1,38 @@
+# 模型参数
+model:
+  name: "WindTurbineNet"
+  num_classes: 7
+  input_size: 640
+
+# 训练参数
+train:
+  epochs: 10
+  batch: 32
+  lr0: 0.001
+  momentum: 0.9
+  weight_decay: 0.0001
+  patience: 20    # 早停
+  save: true
+  save_period: 5
+  device: "cuda:0"
+
+# 数据增强
+augment:
+  enabled: true
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  flipud: 0.5
+  fliplr: 0.5
+  rotate: 0.3
+  scale: 0.5
+  translate: 0.1
+  blur: 0.3
+  noise: 0.2
+
+# 数据集配置
+data:
+  train: datasets/Wind-farm/train/images
+  val: datasets/Wind-farm/val/images
+  test: datasets/Wind-farm/test/images
+  names: ['burning', 'crack', 'deformity', 'dirt', 'oil', 'peeling', 'rusty'] 
