@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="cruiy@10.128.70.14:22 password" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="cruiy@10.128.71.137:22 password (3)" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
-      <paths name="cruiy@10.128.70.14:22 password">
+      <paths name="cruiy@10.128.71.137:22 password">
         <serverdata>
           <mappings>
-            <mapping deploy="/code/python/transformer" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="cruiy@10.128.71.137:22 password (2)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/cruiy/code/python/transformer" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="cruiy@10.128.71.137:22 password (3)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/cruiy/code/python/transformer" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

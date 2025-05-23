@@ -1,6 +1,93 @@
-# WindTurbineNet: 风力发电机组件故障检测系统
+# Wind Turbine Transformer Detector
 
-基于深度学习的风力发电机组件故障检测系统，采用轻量级网络架构和注意力机制，实现高效准确的故障分类。
+基于 Transformer 的风力发电机组件缺陷检测模型。
+
+## 项目结构
+
+```
+modules/
+├── models/
+│   ├── components/
+│   │   ├── backbone.py     # 主干网络
+│   │   ├── fpn.py         # 特征金字塔网络
+│   │   └── transformer.py  # Transformer编解码器
+│   ├── heads/
+│   │   └── detection_head.py  # 检测头
+│   ├── utils/
+│   │   ├── box_ops.py     # 边界框操作
+│   │   └── losses.py      # 损失函数
+│   └── wind_turbine_detector.py  # 主模型
+```
+
+## 模型架构
+
+1. **主干网络 (Backbone)**
+   - ResNet风格的特征提取器
+   - 输出多尺度特征 [P2, P3, P4, P5]
+
+2. **特征金字塔网络 (FPN)**
+   - 特征融合和尺度对齐
+   - 横向连接和自顶向下路径
+
+3. **Transformer模块**
+   - 6层编码器和解码器
+   - 正弦位置编码
+   - 可学习的目标查询
+
+4. **检测头**
+   - 分类和边界框预测
+   - 多层感知机结构
+
+## 安装依赖
+
+```bash
+pip install -r requirements.txt
+```
+
+## 使用方法
+
+```python
+import torch
+from modules.models.wind_turbine_detector import WindTurbineDetector
+
+# 创建模型
+model = WindTurbineDetector(
+    num_classes=7,  # 故障类别数量
+    input_size=640,  # 输入图像大小
+    fpn_channels=256,  # 特征通道数
+    num_queries=100  # 目标查询数量
+)
+
+# 训练模式
+loss_dict = model((images, targets))
+
+# 推理模式
+results = model.inference(images)
+```
+
+## 故障类别
+
+1. burning (燃烧)
+2. crack (裂纹)
+3. deformity (变形)
+4. dirt (污垢)
+5. oil (漏油)
+6. peeling (剥落)
+7. rusty (锈蚀)
+
+## 特点
+
+1. 端到端的目标检测
+2. 无需NMS后处理
+3. 适合小目标检测
+4. 全局信息建模
+5. 多尺度特征融合
+
+## 环境要求
+
+- Python >= 3.7
+- PyTorch >= 1.7.0
+- torchvision >= 0.8.1
 
 ## 项目特点
 
@@ -51,37 +138,6 @@ project/
 ├── requirements.txt          # 项目依赖
 └── README.md                 # 项目说明
 ```
-
-## 模型架构
-
-WindTurbineNet 采用轻量级设计，主要包含以下组件：
-
-1. **特征提取主干网络**
-   - 4层卷积结构
-   - 使用深度可分离卷积降低参数量
-   - 多尺度特征提取
-
-2. **注意力机制**
-   - 空间注意力模块
-   - 强化学习注意力模块
-   - 自适应特征增强
-
-3. **分类头**
-   - 全局平均池化
-   - 双层全连接网络
-   - 7类故障分类输出
-
-## 故障类别
-
-系统可识别以下7类风力发电机组件故障：
-
-1. burning（燃烧）
-2. crack（裂纹）
-3. deformity（变形）
-4. dirt（污渍）
-5. oil（油污）
-6. peeling（剥落）
-7. rusty（锈蚀）
 
 ## 快速开始
 
